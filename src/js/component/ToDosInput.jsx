@@ -19,7 +19,9 @@ const ToDoInput = ({ addTask }) => {
         text: input,
         completed: false,
       };
-      return addTask(newTask);
+      addTask(newTask);
+      setInput("");
+      e.target.blur();
     }
   };
 
@@ -30,6 +32,7 @@ const ToDoInput = ({ addTask }) => {
         className="toDo-input"
         placeholder="Here your side quest"
         name="text"
+        value={input}
         onChange={handleChange}
         onKeyDown={handleSending}
       />
