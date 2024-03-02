@@ -5,26 +5,10 @@ import "../../styles/ToDoList.css";
 
 const ToDosList = () => {
   const [tasks, setTasks] = useState([]);
-  /**
-   *TODO  CREATE THE TO DO USER
-   */
-
-  // not sure if this should be here and with the useEffect like that, this should create a new user everytime the element is loaded.
-  useEffect(() => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
-      method: "POST",
-      body: [],
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }, []);
 
   /**
    *TODO  UPDATE THE TO DO LIST EVERY TIME THE  TASK CHANGES
    */
-
-  // Here I should use  a PUT request to update the to do list every time a new one is to be added
 
   useEffect(() => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
@@ -34,10 +18,18 @@ const ToDosList = () => {
       },
       body: JSON.stringify(tasks),
     })
-      .then((resp) => resp.json())
-      .then((data) => setTasks(data))
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error(`HTTP error! status: ${resp.status}`);
+        }
+        return resp.json();
+      })
+      .then((data) => {
+        setTasks(data.map((task) => task.label));
+      })
       .catch((error) => console.error("Error updating tasks:", error));
   }, [tasks]);
+
   /**
    *TODO  LOAD THE TO DO LIST TASK
    */
@@ -53,7 +45,7 @@ const ToDosList = () => {
       })
       .then((data) => setTasks(data))
       .catch((error) => console.error("Error fetching data:", error));
-  }, [tasks]);
+  }, []);
 
   /**
    *TODO  ADD TASK
@@ -65,56 +57,13 @@ const ToDosList = () => {
     setTasks(updatedTasks);
   };
 
-  /* useEffect(() => {
-    const addTaskFetch = async (tasks) => {
-      try {
-        const response = await fetch(
-          "https://playground.4geeks.com/apis/fake/todos/user/toDoJose",
-          {
-            method: "PUT",
-            body: JSON.stringify(tasks),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setTasks(data);
-      } catch (error) {
-        console.error("Error adding task:", error);
-      }
-    };
-    addTaskFetch
-  }, [tasks]); */
-
-  /** 
+  /**
    *TODO  DELETE TASK
-   
    */
   const deleteTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
   };
-
-  /*   const deleteTask = async (id) => {
-    try {
-      const response = await fetch(
-        `https://playground.4geeks.com/apis/fake/todos/user/toDoJose`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      setTasks(tasks.filter((task) => task.id !== id));
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  }; */
 
   /**
    *TODO  COMPLETE TASK
@@ -129,33 +78,6 @@ const ToDosList = () => {
     });
     setTasks(updatedTasks);
   };
-  /*  const completeTask = async (id) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        task.done = !task.done;
-      }
-      return task;
-    });
-
-    try {
-      const response = await fetch(
-        `https://playground.4geeks.com/apis/fake/todos/user/toDoJose`,
-        {
-          method: "PUT",
-          body: JSON.stringify(updatedTasks),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      setTasks(updatedTasks);
-    } catch (error) {
-      console.error("Error updating task:", error);
-    }
-  }; */
 
   return (
     <>

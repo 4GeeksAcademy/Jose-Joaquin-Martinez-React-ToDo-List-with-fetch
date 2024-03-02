@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ToDoList from "./ToDoList";
 import "../../styles/index.css";
 
 function Home() {
+  /**
+   *TODO  CREATE THE TO DO USER
+   */
+  useEffect(() => {
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
+      method: "POST",
+      body: [],
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }, []);
+  /**
+   *TODO  DELETE USER
+   */
+
   const handleDeleteAccount = async () => {
     try {
       const response = await fetch(
@@ -19,6 +35,8 @@ function Home() {
       console.error("Error deleting account:", error);
     }
   };
+
+  // not sure if this should be here and with the useEffect like that, this should create a new user everytime the element is loaded.
 
   return (
     <div className="App">
