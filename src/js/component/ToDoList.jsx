@@ -27,7 +27,7 @@ const ToDosList = () => {
   // Here I should use  a PUT request to update the to do list every time a new one is to be added
 
   useEffect(() => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/alesanchezr", {
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
       method: "PUT",
       body: JSON.stringify(tasks),
       headers: {
