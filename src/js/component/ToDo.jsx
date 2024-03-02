@@ -2,13 +2,16 @@ import React from "react";
 import "../../styles/ToDo.css";
 import { MdOutlineDelete } from "react-icons/md";
 
-const ToDo = ({ id, text, completed, completeTask, deleteTask }) => {
+const ToDo = ({ id, label, done, completeTask, deleteTask }) => {
+  const handleComplete = () => completeTask(id);
+  const handleDelete = () => deleteTask(id);
+
   return (
-    <div className={completed ? "toDo-container completed" : "toDo-container"}>
-      <div className="toDo-text" onClick={() => completeTask(id)}>
-        {text}
+    <div className={done ? "toDo-container completed" : "toDo-container"}>
+      <div className="toDo-text" onClick={handleComplete}>
+        {label}
       </div>
-      <div className="toDo-icons-container" onClick={() => deleteTask(id)}>
+      <div className="toDo-icons-container" onClick={handleDelete}>
         <MdOutlineDelete className="toDo-icon" />
       </div>
     </div>

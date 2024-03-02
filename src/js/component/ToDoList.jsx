@@ -29,26 +29,14 @@ const ToDosList = () => {
   useEffect(() => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
       method: "PUT",
-      body: JSON.stringify(tasks),
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(tasks),
     })
-      .then((resp) => {
-        console.log(resp.ok); // Será true si la respuesta es exitosa
-        console.log(resp.status); // El código de estado 200, 300, 400, etc.
-        console.log(resp.text()); // Intentará devolver el resultado exacto como string
-        return resp.json(); // Intentará parsear el resultado a JSON y retornará una promesa donde puedes usar .then para seguir con la lógica
-      })
-      .then((data) => {
-        // Aquí es donde debe comenzar tu código después de que finalice la búsqueda
-        console.log(data); // Esto imprimirá en la consola el objeto exacto recibido del servidor
-        setTasks(data);
-      })
-      .catch((error) => {
-        // Manejo de errores
-        console.log(error);
-      });
+      .then((resp) => resp.json())
+      .then((data) => setTasks(data))
+      .catch((error) => console.error("Error updating tasks:", error));
   }, [tasks]);
   /**
    *TODO  LOAD THE TO DO LIST TASK
@@ -72,7 +60,7 @@ const ToDosList = () => {
    */
 
   const addTask = (task) => {
-    task.text = task.text.trim();
+    task.label = task.label.trim();
     const updatedTasks = [task, ...tasks];
     setTasks(updatedTasks);
   };
@@ -135,7 +123,7 @@ const ToDosList = () => {
   const completeTask = (id) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
-        task.completed = !task.completed;
+        task.done = !task.done;
       }
       return task;
     });
@@ -177,8 +165,8 @@ const ToDosList = () => {
           <ToDo
             key={task.id}
             id={task.id}
-            text={task.laber}
-            completed={task.done}
+            label={task.label}
+            done={task.done}
             completeTask={completeTask}
             deleteTask={deleteTask}
           />

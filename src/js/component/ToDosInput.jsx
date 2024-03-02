@@ -14,8 +14,8 @@ const ToDoInput = ({ addTask }) => {
       e.preventDefault();
       const newTask = {
         id: uuidv4(),
-        text: input,
-        completed: false,
+        label: input,
+        done: false,
       };
       addTask(newTask);
       setInput("");
