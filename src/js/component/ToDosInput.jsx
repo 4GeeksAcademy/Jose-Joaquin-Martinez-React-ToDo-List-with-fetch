@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/ToDosInput.css";
+import { v4 as uuidv4 } from "uuid";
 
 const ToDoInput = ({ addTask }) => {
   const [input, setInput] = useState("");
@@ -12,10 +13,7 @@ const ToDoInput = ({ addTask }) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const newTask = {
-        id: Math.floor(
-          Math.random() *
-            99999999999999999999999999999999999999999999999999999999999999999999999999999999
-        ),
+        id: uuidv4(),
         text: input,
         completed: false,
       };
