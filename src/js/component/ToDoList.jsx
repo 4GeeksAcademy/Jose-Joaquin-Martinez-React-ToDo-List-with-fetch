@@ -104,7 +104,7 @@ const ToDosList = () => {
   };
 
   return (
-    <>
+    <div className="list-container">
       <ToDosInput addTask={addTask} />
       <div className="todos-container">
         {tasks.map((task) => (
@@ -118,10 +118,12 @@ const ToDosList = () => {
           />
         ))}
       </div>
-      <button className="delete-acc-btn" onClick={handleDeleteAccount}>
-        Delete account
-      </button>
-    </>
+      <div className="button-container">
+        <button className="delete-acc-btn" onClick={handleDeleteAccount}>
+          Delete account
+        </button>
+      </div>
+    </div>
   );
 };
 
