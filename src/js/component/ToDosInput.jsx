@@ -19,7 +19,7 @@ const ToDoInput = ({ addTask }) => {
       };
       addTask(newTask);
       setInput("");
-      e.target.blur();
+      /* e.target.blur(); */
     }
   };
 
