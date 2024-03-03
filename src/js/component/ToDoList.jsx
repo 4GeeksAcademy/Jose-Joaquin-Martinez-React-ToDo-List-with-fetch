@@ -10,13 +10,13 @@ const ToDosList = () => {
    *TODO  UPDATE THE TO DO LIST EVERY TIME THE  TASK CHANGES
    */
 
-  useEffect(() => {
+  const upDateList = (upDateData) => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(tasks),
+      body: JSON.stringify(upDateData),
     })
       .then((resp) => {
         if (!resp.ok) {
@@ -28,27 +28,7 @@ const ToDosList = () => {
         setTasks(data.map((task) => task.label));
       })
       .catch((error) => console.error("Error updating tasks:", error));
-  }, [tasks]);
-
-  /* const upDateList = () => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(tasks),
-    })
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error(`HTTP error! status: ${resp.status}`);
-        }
-        return resp.json();
-      })
-      .then((data) => {
-        setTasks(data.map((task) => task.label));
-      })
-      .catch((error) => console.error("Error updating tasks:", error));
-  }; */
+  };
 
   /**
    *TODO  LOAD THE TO DO LIST TASK
@@ -75,7 +55,7 @@ const ToDosList = () => {
     task.label = task.label.trim();
     const updatedTasks = [task, ...tasks];
     setTasks(updatedTasks);
-    /* upDateList(updatedTasks); */
+    upDateList(updatedTasks);
   };
 
   /**
@@ -84,7 +64,7 @@ const ToDosList = () => {
   const deleteTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
-    /* upDateList(updatedTasks); */
+    upDateList(updatedTasks);
   };
 
   /**
@@ -99,7 +79,7 @@ const ToDosList = () => {
       return task;
     });
     setTasks(updatedTasks);
-    /* upDateList(updatedTasks); */
+    upDateList(updatedTasks);
   };
 
   return (
