@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
       method: "POST",
-      body: [],
+      body: JSON.stringify([]),
       headers: {
         "Content-Type": "application/json",
       },
