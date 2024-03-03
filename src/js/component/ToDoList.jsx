@@ -10,7 +10,7 @@ const ToDosList = () => {
    *TODO  UPDATE THE TO DO LIST EVERY TIME THE  TASK CHANGES
    */
 
-  useEffect(() => {
+  const upDateList = () => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
       method: "PUT",
       headers: {
@@ -28,7 +28,7 @@ const ToDosList = () => {
         setTasks(data.map((task) => task.label));
       })
       .catch((error) => console.error("Error updating tasks:", error));
-  }, [tasks]);
+  };
 
   /**
    *TODO  LOAD THE TO DO LIST TASK
@@ -55,6 +55,7 @@ const ToDosList = () => {
     task.label = task.label.trim();
     const updatedTasks = [task, ...tasks];
     setTasks(updatedTasks);
+    upDateList(updatedTasks);
   };
 
   /**
@@ -63,6 +64,7 @@ const ToDosList = () => {
   const deleteTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
+    upDateList(updatedTasks);
   };
 
   /**
@@ -77,6 +79,7 @@ const ToDosList = () => {
       return task;
     });
     setTasks(updatedTasks);
+    upDateList(updatedTasks);
   };
 
   return (

@@ -4,7 +4,9 @@ import "../../styles/index.css";
 
 function Home() {
   /**
-   *TODO  CREATE THE TO DO USER
+   *TODO  CREATE THE TO DO USER 
+
+    // not sure if this should be here and with the useEffect like that, this should create a new user everytime the element is loaded.
    */
   useEffect(() => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
@@ -15,6 +17,7 @@ function Home() {
       },
     });
   }, []);
+
   /**
    *TODO  DELETE USER
    */
@@ -30,13 +33,11 @@ function Home() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      console.log("Account deleted successfully");
+      alert("Account deleted successfully");
     } catch (error) {
       console.error("Error deleting account:", error);
     }
   };
-
-  // not sure if this should be here and with the useEffect like that, this should create a new user everytime the element is loaded.
 
   return (
     <div className="App">
