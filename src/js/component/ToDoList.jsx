@@ -7,27 +7,6 @@ const ToDosList = () => {
   const [tasks, setTasks] = useState([]);
 
   /**
-   *TODO  UPDATE THE TO DO LIST EVERY TIME THE  TASK CHANGES
-   */
-
-  const upDateList = (upDateData) => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(upDateData),
-    })
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error(`HTTP error! status: ${resp.status}`);
-        }
-        return resp.json();
-      })
-      .catch((error) => console.error("Error updating tasks:", error));
-  };
-
-  /**
    *TODO  DELETE USER
    */
 
@@ -47,6 +26,26 @@ const ToDosList = () => {
     } catch (error) {
       console.error("Error deleting account:", error);
     }
+  };
+
+  /**
+   *TODO  UPDATE THE TO DO LIST EVERY TIME THE  TASK CHANGES
+   */
+
+  const upDateList = (upDateData) => {
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(upDateData),
+    })
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error(`HTTP error! status: ${resp.status}`);
+        }
+      })
+      .catch((error) => console.error("Error updating tasks:", error));
   };
 
   /**
