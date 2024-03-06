@@ -3,7 +3,7 @@ import ToDosInput from "./ToDosInput";
 import ToDo from "./ToDo";
 import "../../styles/ToDoList.css";
 
-const ToDosList = () => {
+const ToDosList = ({ setAccount }) => {
   const [tasks, setTasks] = useState([]);
 
   /**
@@ -56,6 +56,10 @@ const ToDosList = () => {
   useEffect(() => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/toDoJose")
       .then((response) => {
+        if (response.status === 400) {
+          setAccount(true);
+          throw new Error("Error al obtener los datos");
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

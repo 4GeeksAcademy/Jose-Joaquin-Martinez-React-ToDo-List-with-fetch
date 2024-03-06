@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ToDoList from "./ToDoList";
 import "../../styles/index.css";
 
 function Home() {
+  const [account, setAccount] = useState(false);
+
   /**
    *TODO  CREATE THE TO DO USER 
    
@@ -15,13 +17,13 @@ function Home() {
         "Content-Type": "application/json",
       },
     });
-  }, []);
+  }, [account]);
 
   return (
     <div className="App">
       <h1>SIDE QUESTS</h1>
       <div className="tasks-main-list">
-        <ToDoList />
+        <ToDoList setAccount={setAccount} />
       </div>
     </div>
   );
